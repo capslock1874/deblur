@@ -1,0 +1,41 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ERRMSG_H	errmsg.h	2;"	d
+ERR_ARGUMENT	errmsg.h	8;"	d
+ERR_GRAB_FRAME	errmsg.h	7;"	d
+ERR_NO_ERROR	errmsg.h	5;"	d
+ERR_OPEN_FILE	errmsg.h	6;"	d
+FUNCTIONS_H	functions.h	2;"	d
+MAX_CORNERS	getHomographies.cpp	/^static const int MAX_CORNERS = 500 ;$/;"	v	file:
+P	errmsg.h	3;"	d
+calLuckMats	calLuckiness.cpp	/^CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size)$/;"	f	signature:(CvMat** homographies , int rows , int cols , int size)
+calLuckMats	functions.h	/^CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size) ;$/;"	p	signature:(CvMat** homographies , int rows , int cols , int size)
+calLuckiness	calLuckiness.cpp	/^CvMat* calLuckiness(CvMat* homoPre , CvMat* homoPost , int rows , int cols)$/;"	f	signature:(CvMat* homoPre , CvMat* homoPost , int rows , int cols)
+calLuckiness	functions.h	/^CvMat* calLuckiness(CvMat* homoPre , CvMat* homoPost , int rows , int cols) ;$/;"	p	signature:(CvMat* homoPre , CvMat* homoPost , int rows , int cols)
+convertPointsToMat	convertPointsToMat.cpp	/^CvMat* convertPointsToMat(CvPoint2D32f* corner , int corner_count)$/;"	f	signature:(CvPoint2D32f* corner , int corner_count)
+convertPointsToMat	functions.h	/^CvMat* convertPointsToMat(CvPoint2D32f* corners , int corner_count);$/;"	p	signature:(CvPoint2D32f* corners , int corner_count)
+displayMat	functions.h	/^void displayMat(CvMat* mat) ;$/;"	p	signature:(CvMat* mat)
+displayMat	tools.cpp	/^void displayMat(CvMat* mat)$/;"	f	signature:(CvMat* mat)
+getFramesFromVideo	functions.h	/^IplImage** getFramesFromVideo(const char* fileName , int& size);$/;"	p	signature:(const char* fileName , int& size)
+getFramesFromVideo	getFrames.cpp	/^IplImage** getFramesFromVideo(const char* fileName , int& size)$/;"	f	signature:(const char* fileName , int& size)
+getHomographies	functions.h	/^CvMat** getHomographies(IplImage** frames , int size);$/;"	p	signature:(IplImage** frames , int size)
+getHomographies	getHomographies.cpp	/^CvMat** getHomographies(IplImage** frames , int size) \/* 传入到图片必须是灰度图 *\/$/;"	f	signature:(IplImage** frames , int size)
+main	deblur.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
+myErrmsg	errmsg.cpp	/^const char* myErrmsg[] ={$/;"	v
+myErrno	errmsg.cpp	/^long myErrno = 0 ;$/;"	v
+myErrno	getFrames.cpp	/^extern long myErrno ;$/;"	x
+myErrno	getHomographies.cpp	/^extern long myErrno ;$/;"	x
+objs	makefile	/^objs = main.o getHomographies.o convertPointsToMat.o getFrames.o errmsg.o calLuckiness.o tools.o$/;"	m
+opencvLib	makefile	/^opencvLib = `pkg-config opencv --libs  --cflags`$/;"	m
+perrmsg	errmsg.cpp	/^void perrmsg(const char* info)$/;"	f	signature:(const char* info)
+perrmsg	errmsg.h	/^void perrmsg(const char* info);$/;"	p	signature:(const char* info)
+releaseFrames	functions.h	/^void releaseFrames(IplImage*** frames , int& size) ;$/;"	p	signature:(IplImage*** frames , int& size)
+releaseFrames	tools.cpp	/^void releaseFrames(IplImage*** frames , int& size)$/;"	f	signature:(IplImage*** frames , int& size)
+releaseImageArray	getHomographies.cpp	/^static void releaseImageArray(IplImage** array , int size)$/;"	f	file:	signature:(IplImage** array , int size)
+releaseMats	tools.cpp	/^void releaseMats(CvMat*** mats , int size )$/;"	f	signature:(CvMat*** mats , int size )
+sigma	calLuckiness.cpp	/^static const int sigma = 20 ;$/;"	v	file:
+square	calLuckiness.cpp	24;"	d	file:
