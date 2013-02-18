@@ -38,6 +38,7 @@ void p(pair<int,int>& elem)
 
 int main(int argc, char *argv[])
 {
+	just a test ;
 	vector<pair<int,int> > v ;
 	f(v);
 	for_each(v.begin() , v.end() , p) ;

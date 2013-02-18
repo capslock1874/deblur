@@ -10,6 +10,8 @@ const char* myErrmsg[] ={
 	/*3*/	"argument error"
 } ;
 
+
+
 void perrmsg(const char* info)
 {
 	if( info )

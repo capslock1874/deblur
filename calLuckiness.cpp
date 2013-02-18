@@ -90,7 +90,6 @@ CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size)
 	return luckMats ;
 }
 
-
 //int main(int argc, char *argv[])
 //{
 	//float pos[] ={1 , 0 , 1 ,

@@ -23,16 +23,17 @@ extern long myErrno ;
 
 static const double T = 20 ;
 
+
 static CvMat* calWarpFunH(const double t , CvMat* homoMat) 
 {
 	float identityMatArray[9] = { 1 , 0 , 0 ,
 							   0 , 1 , 0 ,
 							   0 , 0 , 1 } ;
-	
+
 	CvMat identityMat = cvMat( 3 , 3 , CV_32FC1 , identityMatArray );
 	CvMat* warpMat = cvCreateMat(3 , 3 , CV_32FC1);
 
-	cvAddWeighted( &identityMat , (T - t) / T , homoMat , t / T , 0 , warpMat); 	
+	cvAddWeighted( &identityMat , (T - t) / T , homoMat , t / T , 0 , warpMat);
 	return warpMat ;
 }
 
@@ -46,12 +47,12 @@ IplImage* blurFunc(CvMat* preHomography , CvMat* homography , IplImage* latent ,
 	}
 	CvMat* preHomographyInvert = cvCreateMat(3 , 3 , CV_32FC1) ;
 	CvSize imageSize = cvGetSize(latent) ;
-	IplImage* preSum = cvCreateImage( imageSize , latent->depth , latent->nChannels); 
-	IplImage* sum = cvCreateImage( imageSize , latent->depth , latent->nChannels); 
-	IplImage* tmp = cvCreateImage( imageSize , latent->depth , latent->nChannels); 
-	IplImage* preHomoFrame = cvCreateImage( imageSize , latent->depth , latent->nChannels); 
-	IplImage* postHomoFrame = cvCreateImage( imageSize , latent->depth , latent->nChannels); 
-	IplImage* result  = cvCreateImage( imageSize , latent->depth , latent->nChannels); 
+	IplImage* preSum = cvCreateImage( imageSize , latent->depth , latent->nChannels);
+	IplImage* sum = cvCreateImage( imageSize , latent->depth , latent->nChannels);
+	IplImage* tmp = cvCreateImage( imageSize , latent->depth , latent->nChannels);
+	IplImage* preHomoFrame = cvCreateImage( imageSize , latent->depth , latent->nChannels);
+	IplImage* postHomoFrame = cvCreateImage( imageSize , latent->depth , latent->nChannels);
+	IplImage* result  = cvCreateImage( imageSize , latent->depth , latent->nChannels);
 
 	CvMat* preWarpMat , *postWarpMat ;
 
@@ -69,11 +70,11 @@ IplImage* blurFunc(CvMat* preHomography , CvMat* homography , IplImage* latent ,
 		postWarpMat = calWarpFunH( d , homography ) ;
 		cvWarpPerspective(latent , preHomoFrame , preWarpMat) ;
 		cvWarpPerspective(latent , postHomoFrame , postWarpMat) ;
-		
+
 		//cvShowImage("win1" , preHomoFrame) ;
 		cvAdd(preHomoFrame , postHomoFrame , tmp);
 		cvAdd(tmp , preSum , sum) ;
-		//cvShowImage("win2" , sum) ;	
+		//cvShowImage("win2" , sum) ;
 		//cvWaitKey(0) ;
 		cvCopy(sum , preSum) ;
 	}
@@ -101,11 +102,11 @@ int main(int argc, char *argv[])
 	float homoMatArray[9] = { 1 , 0 , 0 ,
 						   0 , 1 , 0 ,
 						   0 , 0 , 1 } ;
-	
+
 	CvMat homoMat = cvMat( 3 , 3 , CV_32FC1 , homoMatArray);
 	IplImage* a = cvLoadImage("./images/1.jpeg");
 	IplImage* b = cvLoadImage("./images/2.jpeg");
-	
+
 	IplImage* res = blurFunc(&homoMat , &homoMat ,a , 4) ;
 	cvNamedWindow("win");
 	cvShowImage("win" , res);
