@@ -7,20 +7,22 @@
 #include  <iostream>
 #include  <cstdio>
 #include <algorithm>
+#include  <limits.h>
 #include  <cstring>
 #include  <vector>
+using namespace std ;
 
-CvMat** getHomographies(IplImage** frames , int size);
+CvMat** getHomographies(IplImage** frames , int size , CvMat** corners);
 CvMat* convertPointsToMat(CvPoint2D32f* corners , int corner_count);
 IplImage** getFramesFromVideo(const char* fileName , int& size);
-
+int deterTaoOfBlurFunc(CvMat** corners , int baseImage , IplImage** frames ,
+		int* pairs , int pairSize ,  CvMat** homographies);
 CvMat* calLuckiness(CvMat* homoPre , CvMat* homoPost , int rows , int cols) ;
 CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size) ;
-
+IplImage* blurFunc(CvMat* preHomography , CvMat* homography , IplImage* latent , int tao);
 CvMat* calWarpFunH(const float t , CvMat* homoMat) ;
 
-void findPairs(int start , int end , double* avgLuckiness ,std:: vector<std::pair<int , int> > &kPairs);
-void findKPairs(double* avgLuckiness , int size , std::vector<std::pair<int,int> > &kPairs);
+int findPairs(int start , int end , double* avgLuckiness , int* pairs , int& pairSize);
 //tools function 
 void releaseFrames(IplImage*** frames , int& size) ;
 void releaseMats(CvMat*** , int);

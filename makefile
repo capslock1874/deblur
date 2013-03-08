@@ -1,6 +1,6 @@
 opencvLib = `pkg-config opencv --libs  --cflags`
 objs = main.o getHomographies.o convertPointsToMat.o getFrames.o errmsg.o calLuckiness.o tools.o \
-	   deblurToolsFuns.o
+	   deblurToolsFuns.o calBlurFun.o
 
 deblur: $(objs) 
 	g++ -o deblur $(objs) $(opencvLib) 
@@ -28,6 +28,9 @@ tools.o: functions.h errmsg.h
 
 deblurToolsFuns.o: functions.h errmsg.h
 	g++ -c deblurToolsFuns.cpp $(opencvLib)
+
+calBlurFun.o: functions.h errmsg.h
+	g++ -c calBlurFun.cpp $(opencvLib)
 
 clean :
 	rm *.o 

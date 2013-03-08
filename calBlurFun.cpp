@@ -96,22 +96,22 @@ IplImage* blurFunc(CvMat* preHomography , CvMat* homography , IplImage* latent ,
 
 
 
-int main(int argc, char *argv[])
-{
+//int main(int argc, char *argv[])
+//{
 
-	float homoMatArray[9] = { 1 , 0 , 0 ,
-						   0 , 1 , 0 ,
-						   0 , 0 , 1 } ;
+	//float homoMatArray[9] = { 1 , 0 , 0 ,
+						   //0 , 1 , 0 ,
+						   //0 , 0 , 1 } ;
 
-	CvMat homoMat = cvMat( 3 , 3 , CV_32FC1 , homoMatArray);
-	IplImage* a = cvLoadImage("./images/1.jpeg");
-	IplImage* b = cvLoadImage("./images/2.jpeg");
+	//CvMat homoMat = cvMat( 3 , 3 , CV_32FC1 , homoMatArray);
+	//IplImage* a = cvLoadImage("./images/1.jpeg");
+	//IplImage* b = cvLoadImage("./images/2.jpeg");
 
-	IplImage* res = blurFunc(&homoMat , &homoMat ,a , 4) ;
-	cvNamedWindow("win");
-	cvShowImage("win" , res);
-	cvWaitKey(0);
-	cvDestroyWindow("win");
-	cvReleaseImage(&res) ;
-}
+	//IplImage* res = blurFunc(&homoMat , &homoMat ,a , 4) ;
+	//cvNamedWindow("win");
+	//cvShowImage("win" , res);
+	//cvWaitKey(0);
+	//cvDestroyWindow("win");
+	//cvReleaseImage(&res) ;
+//}
 

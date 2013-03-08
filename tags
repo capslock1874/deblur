@@ -15,13 +15,10 @@ MAX_CORNERS	getHomographies.cpp	/^static const int MAX_CORNERS = 500 ;$/;"	v	fil
 P	errmsg.h	3;"	d
 T	calBlurFun.cpp	/^static const double T = 20 ;$/;"	v	file:
 blurFunc	calBlurFun.cpp	/^IplImage* blurFunc(CvMat* preHomography , CvMat* homography , IplImage* latent , int tao)$/;"	f	signature:(CvMat* preHomography , CvMat* homography , IplImage* latent , int tao)
-calKpairHomograpies	deblurToolsFuns.cpp	/^void calKpairHomograpies(CvMat** homographies , luckinessPair &kPairs , iToJHomos &pairHomographies )$/;"	f	signature:(CvMat** homographies , luckinessPair &kPairs , iToJHomos &pairHomographies )
 calLuckMats	calLuckiness.cpp	/^CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size)$/;"	f	signature:(CvMat** homographies , int rows , int cols , int size)
 calLuckMats	functions.h	/^CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size) ;$/;"	p	signature:(CvMat** homographies , int rows , int cols , int size)
 calLuckiness	calLuckiness.cpp	/^CvMat* calLuckiness(CvMat* homoPre , CvMat* homoPost , int rows , int cols)$/;"	f	signature:(CvMat* homoPre , CvMat* homoPost , int rows , int cols)
 calLuckiness	functions.h	/^CvMat* calLuckiness(CvMat* homoPre , CvMat* homoPost , int rows , int cols) ;$/;"	p	signature:(CvMat* homoPre , CvMat* homoPost , int rows , int cols)
-calPairHomography	deblurToolsFuns.cpp	/^	calPairHomography(CvMat** h ,iToJHomos& p)$/;"	f	struct:calPairHomography	signature:(CvMat** h ,iToJHomos& p)
-calPairHomography	deblurToolsFuns.cpp	/^struct calPairHomography$/;"	s	file:
 calWarpFunH	calBlurFun.cpp	/^static CvMat* calWarpFunH(const double t , CvMat* homoMat) $/;"	f	file:	signature:(const double t , CvMat* homoMat)
 calWarpFunH	functions.h	/^CvMat* calWarpFunH(const float t , CvMat* homoMat) ;$/;"	p	signature:(const float t , CvMat* homoMat)
 convertPointsToMat	convertPointsToMat.cpp	/^CvMat* convertPointsToMat(CvPoint2D32f* corner , int corner_count)$/;"	f	signature:(CvPoint2D32f* corner , int corner_count)
@@ -29,18 +26,12 @@ convertPointsToMat	functions.h	/^CvMat* convertPointsToMat(CvPoint2D32f* corners
 displayMat	functions.h	/^void displayMat(CvMat* mat) ;$/;"	p	signature:(CvMat* mat)
 displayMat	tools.cpp	/^void displayMat(CvMat* mat)$/;"	f	signature:(CvMat* mat)
 f	te.cpp	/^void f(vector< pair<int,int> >& v ){$/;"	f	signature:(vector< pair<int,int> >& v )
-findKPairs	deblurToolsFuns.cpp	/^void findKPairs(double* avgLuckiness , int size ,luckinessPair &kPairs)$/;"	f	signature:(double* avgLuckiness , int size ,luckinessPair &kPairs)
-findKPairs	functions.h	/^void findKPairs(double* avgLuckiness , int size , std::vector<std::pair<int,int> > &kPairs);$/;"	p	signature:(double* avgLuckiness , int size , std::vector<std::pair<int,int> > &kPairs)
-findPairs	deblurToolsFuns.cpp	/^void findPairs(int start , int end , double* avgLuckiness ,luckinessPair &kPairs)$/;"	f	signature:(int start , int end , double* avgLuckiness ,luckinessPair &kPairs)
-findPairs	functions.h	/^void findPairs(int start , int end , double* avgLuckiness ,std:: vector<std::pair<int , int> > &kPairs);$/;"	p	signature:(int start , int end , double* avgLuckiness ,std:: vector<std::pair<int , int> > &kPairs)
+findPairs	deblurToolsFuns.cpp	/^int findPairs(int start , int end , double* avgLuckiness , int* pairs , int& pairSize)$/;"	f	signature:(int start , int end , double* avgLuckiness , int* pairs , int& pairSize)
+findPairs	functions.h	/^int findPairs(int start , int end , double* avgLuckiness , int* pairs , int& pairSize);$/;"	p	signature:(int start , int end , double* avgLuckiness , int* pairs , int& pairSize)
 getFramesFromVideo	functions.h	/^IplImage** getFramesFromVideo(const char* fileName , int& size);$/;"	p	signature:(const char* fileName , int& size)
 getFramesFromVideo	getFrames.cpp	/^IplImage** getFramesFromVideo(const char* fileName , int& size)$/;"	f	signature:(const char* fileName , int& size)
-getHomographies	functions.h	/^CvMat** getHomographies(IplImage** frames , int size);$/;"	p	signature:(IplImage** frames , int size)
-getHomographies	getHomographies.cpp	/^CvMat** getHomographies(IplImage** frames , int size) \/* 传入到图片必须是灰度图 *\/$/;"	f	signature:(IplImage** frames , int size)
-homographies	deblurToolsFuns.cpp	/^	CvMat** homographies ;$/;"	m	struct:calPairHomography	file:
-iToJHomos	deblurToolsFuns.cpp	/^typedef std::vector<CvMat*> iToJHomos ;$/;"	t	file:
+getHomographies	getHomographies.cpp	/^CvMat** getHomographies(IplImage** frames , int size , CvMat** corners) \/* 传入到图片必须是灰度图 *\/$/;"	f	signature:(IplImage** frames , int size , CvMat** corners)
 kpart	te.cpp	27;"	d	file:
-luckinessPair	deblurToolsFuns.cpp	/^typedef std::vector<std::pair<int , int> > luckinessPair ;$/;"	t	file:
 main	calBlurFun.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
 main	deblur.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
 main	te.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
@@ -48,9 +39,7 @@ myErrmsg	errmsg.cpp	/^const char* myErrmsg[] ={$/;"	v
 myErrno	errmsg.cpp	/^long myErrno = 0 ;$/;"	v
 objs	makefile	/^objs = main.o getHomographies.o convertPointsToMat.o getFrames.o errmsg.o calLuckiness.o tools.o \\$/;"	m
 opencvLib	makefile	/^opencvLib = `pkg-config opencv --libs  --cflags`$/;"	m
-operator	deblurToolsFuns.cpp	/^	void operator( )(std::pair<int,int>& elem)$/;"	f	struct:calPairHomography	signature:(std::pair<int,int>& elem)
 p	te.cpp	/^void p(pair<int,int>& elem)$/;"	f	signature:(pair<int,int>& elem)
-pairHomographies	deblurToolsFuns.cpp	/^	iToJHomos& pairHomographies ;$/;"	m	struct:calPairHomography	file:
 perrmsg	errmsg.cpp	/^void perrmsg(const char* info)$/;"	f	signature:(const char* info)
 perrmsg	errmsg.h	/^void perrmsg(const char* info);$/;"	p	signature:(const char* info)
 releaseFrames	functions.h	/^void releaseFrames(IplImage*** frames , int& size) ;$/;"	p	signature:(IplImage*** frames , int& size)

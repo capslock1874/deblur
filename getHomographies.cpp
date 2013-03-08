@@ -35,22 +35,21 @@ static void releaseImageArray(IplImage** array , int size)
 	
 }
 
-CvMat** getHomographies(IplImage** frames , int size) /* 传入到图片必须是灰度图 */
+CvMat** getHomographies(IplImage** frames , int size , CvMat** corners) /* 传入到图片必须是灰度图 */
 {
 	IplImage** grayFrames = frames ;
 
-	if(frames == NULL || frames[0]->nChannels != 1 || size <= 0 )
+	if(frames == NULL || size <= 0)
+		return NULL ;
+
+	if(frames[0]->nChannels != 1)
 	{
 		grayFrames = new IplImage*[size] ;
 		CvSize imgSize = cvGetSize(frames[0]);
-		//cvNamedWindow("win");
 		for( int i = 0 ; i < size ; i++ )
 		{
 			grayFrames[i] = cvCreateImage(imgSize , IPL_DEPTH_8U , 1);
 			cvCvtColor(frames[i] , grayFrames[i] , CV_RGB2GRAY) ;
-			//cvShowImage("win" , grayFrames[i]);
-			//cvWaitKey(333);
-			//P(i);
 		}	
 	}
 	
@@ -60,8 +59,6 @@ CvMat** getHomographies(IplImage** frames , int size) /* 传入到图片必须�
 
 	imgA = grayFrames[0] ;
 
-//	P(grayFrames[0]->depth);
-//	P(grayFrames[0]->nChannels);
 
 	CvSize img_size = cvGetSize(imgA);
 	int win_size = 10 ;
@@ -93,6 +90,11 @@ CvMat** getHomographies(IplImage** frames , int size) /* 传入到图片必须�
 			cvSize(-1 , -1) ,
 			cvTermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS , 20 ,  0.03 ) 
 			) ;
+
+	CvMat* cornerMat = convertPointsToMat(cornersA , corner_count) ;
+	CvMat* cornerMat_ = cvCreateMat(corner_count , 3 , CV_32FC1) ;
+	cvConvertPointsHomogenious(cornerMat , cornerMat_) ;
+	corners[0] = cornerMat_ ; 
 
 	char features_found[MAX_CORNERS] ;
 	float features_error[MAX_CORNERS] ;
@@ -142,12 +144,14 @@ CvMat** getHomographies(IplImage** frames , int size) /* 传入到图片必须�
 		cvConvertPointsHomogenious(cornersBMat , cornersBMat_) ;
 
 		CvMat* homography = cvCreateMat(3 , 3 , CV_32FC1);
+		corners[i] = cornersBMat_ ;
 		cvFindHomography(cornersAMat_ , cornersBMat_ , homography , CV_RANSAC , 1 );
 
 		homographies[i-1] = homography ;
 		
 		imgA = imgB ;
-
+		memcpy(cornersA , cornersB , sizeof(cornersB)) ;
+		memset(cornersB , 0 , sizeof(cornersB));
 		//for( int i = 0 ; i < 3 ; i++ )
 		//{
 			//float* ptr = (float*)(homographies[i]->data.ptr + i * homographies[i]->step) ;

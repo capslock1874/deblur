@@ -37,8 +37,12 @@ CvMat* calLuckiness(CvMat* homoPre , CvMat* homoPost , int rows , int cols)
 	CvMat homoPreInvert = cvMat( 3 , 3 , CV_32FC1 , homoPreInvertArray) ;
 	float* ptr = NULL ;
 	float pixelDisplacement , disToPost , disToPre ;
+	int foo = 2 ; 
+	if( homoPre )
+	{
 
-	cvInvert(homoPre , &homoPreInvert , CV_LU);
+		cvInvert(homoPre , &homoPreInvert , CV_LU);
+	}
 
 	for( int i = 0 ; i < rows ; i++ )
 	{
@@ -49,18 +53,35 @@ CvMat* calLuckiness(CvMat* homoPre , CvMat* homoPost , int rows , int cols)
 		{
 			index[1] = (float)j ;
 			index[2] = 1.0 ;
+			if( homoPost )
+			{
 
-			cvMatMul(&indexMat , homoPost , &homoedIndex) ;
-			
-			disToPost = square(homoedIndexArray[0] / homoedIndexArray[2] - index[0])
-							+ square(homoedIndexArray[1] / homoedIndexArray[2] - index[1]) ;
-			
-			cvMatMul(&indexMat , homoPre , &homoedIndex) ;
-			
-			disToPre = square(homoedIndexArray[0] / homoedIndexArray[2] - index[0])
-							+ square(homoedIndexArray[1] / homoedIndexArray[2] - index[1]) ;
+				cvMatMul(&indexMat , homoPost , &homoedIndex) ;
 
-			pixelDisplacement = exp(-1 * (disToPost + disToPre) / (2 * square(sigma)));
+				disToPost = square(homoedIndexArray[0] / homoedIndexArray[2] - index[0])
+					+ square(homoedIndexArray[1] / homoedIndexArray[2] - index[1]) ;
+			}
+			else
+			{
+				disToPost = 0 ;
+				foo = 1 ; 
+			} 
+
+			if( homoPre )
+			{
+
+				cvMatMul(&indexMat , homoPre , &homoedIndex) ;
+
+				disToPre = square(homoedIndexArray[0] / homoedIndexArray[2] - index[0])
+					+ square(homoedIndexArray[1] / homoedIndexArray[2] - index[1]) ;
+			}
+			else
+			{
+				disToPre = 0 ;
+				foo = 1 ;
+			}
+
+			pixelDisplacement = exp(-1 * (disToPost + disToPre) / (foo * square(sigma)));
 			
 			*ptr = pixelDisplacement ; 
 		}
@@ -76,7 +97,7 @@ CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size)
 	CvMat** luckMats = new CvMat*[size] ;
 	CvMat *homoPre , *homoPost ;
 
-	luckMats[0] = calLuckiness(homographies[0] , homographies[0] , rows , cols) ;
+	luckMats[0] = calLuckiness(NULL , homographies[0] , rows , cols) ;
 
 	for( int i = 1 ; i < size - 1 ; i++ )
 	{
@@ -85,7 +106,7 @@ CvMat** calLuckMats(CvMat** homographies , int rows , int cols , int size)
 		luckMats[i] = calLuckiness(homoPre , homoPost , rows , cols) ;
 	}
 	
-	luckMats[size-1] = calLuckiness(homographies[size-2] , homographies[size-2] , rows , cols) ;
+	luckMats[size-1] = calLuckiness(homographies[size-2] , NULL , rows , cols) ;
 
 	return luckMats ;
 }
